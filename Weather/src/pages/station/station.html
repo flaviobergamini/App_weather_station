@@ -9,5 +9,9 @@
 </ion-header>
 
 <ion-content padding>
-<h1>Weather Station</h1>
+   <!-- <ion-item>
+      <ion-input type="text" placeholder="Comando" [(ngModel)]="task"></ion-input>
+    </ion-item> -->
+    <button ion-button block class="button-add" (click)="sendMessageModule()">Module</button>   
+    <button ion-button block class="button-add" (click)="sendMessageStation()">Station</button>
 </ion-content>

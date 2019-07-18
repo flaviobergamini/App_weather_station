@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AlertController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 export class Users{
 	email: string;
@@ -28,7 +29,8 @@ loginForm: FormGroup;
     public navParams: NavParams,
     public formbuilder: FormBuilder,
     public afAuth: AngularFireAuth, 
-    public Alertctrl: AlertController
+    public Alertctrl: AlertController,
+    public Storage: Storage
     ) {
     this.loginForm = this.formbuilder.group({
       email: [null, [Validators.required, Validators.email]],
@@ -38,14 +40,14 @@ loginForm: FormGroup;
   entrar(){
     this.afAuth.auth.signInWithEmailAndPassword(this.email.value,this.password.value)
 
-    .then(data => {
+    .then((response) => {
 
-      console.log('Data do login: ', data);
-      this.users.email = this.email.value
-      this.users.senha = this.password.value
-
-      this.navCtrl.setRoot('station');
-
+      this.Storage.set('user',response.user.uid)
+      .then(() => {
+        this.users.email = this.email.value
+        this.users.senha = this.password.value
+        this.navCtrl.setRoot('station');
+      })
     })
 
     .catch((error: any) => {
