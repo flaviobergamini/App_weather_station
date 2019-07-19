@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { StationPage } from './station';
+import StationPage from './station';
 
 @NgModule({
   declarations: [

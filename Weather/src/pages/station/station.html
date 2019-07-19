@@ -9,6 +9,45 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-card *ngFor="let dados of dadosdb"> 
+    <ion-card-content>
+      <ion-card-title>
+        {{dados.nome}}
+      </ion-card-title>
+      <p>
+        {{dados.umidade}}
+      </p>
+      <p>
+        {{dados.pluviometro}} 
+      </p>
+      <p>
+        {{dados.acidez}}
+      </p>
+      <p>
+        {{dados.temp}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngFor="let dados of dadosdb"> 
+    <ion-card-content>
+        <ion-card-title>
+          {{dados.nomeM}}
+        </ion-card-title>
+        <p>
+          {{dados.umidadeM}}
+        </p>
+        <p>
+          {{dados.pluviometroM}} 
+        </p>
+        <p>
+          {{dados.acidezM}}
+        </p>
+        <p>
+          {{dados.tempM}}
+        </p>
+      </ion-card-content>
+    </ion-card>
    <!-- <ion-item>
       <ion-input type="text" placeholder="Comando" [(ngModel)]="task"></ion-input>
     </ion-item> -->

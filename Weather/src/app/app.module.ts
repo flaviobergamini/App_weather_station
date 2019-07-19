@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { IonicStorageModule } from '@ionic/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    HttpModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,6 +36,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
     SplashScreen,
     AngularFireAuth,
     AngularFireDatabase,
+    //Http,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
