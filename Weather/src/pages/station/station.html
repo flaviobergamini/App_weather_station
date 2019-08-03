@@ -9,45 +9,67 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let dados of dadosdb"> 
+  <ion-card *ngFor="let dados of dadosdb1"> 
     <ion-card-content>
       <ion-card-title>
-        {{dados.nome}}
+        Station
       </ion-card-title>
       <p>
-        {{dados.umidade}}
+        Acidez:
       </p>
       <p>
-        {{dados.pluviometro}} 
-      </p>
-      <p>
-        {{dados.acidez}}
-      </p>
-      <p>
-        {{dados.temp}}
+        {{dados}}
       </p>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor="let dados of dadosdb"> 
+  <ion-card *ngFor="let dados of dadosdb1"> 
     <ion-card-content>
-        <ion-card-title>
-          {{dados.nomeM}}
-        </ion-card-title>
+      <p>
+        Umidade:
+      </p>
+      <p>
+        {{dados}}
+      </p>
+    </ion-card-content>
+    </ion-card>
+  
+  <ion-card *ngFor="let dados of dadosdb1"> 
+      <ion-card-content>
         <p>
-          {{dados.umidadeM}}
+          Temperatura:
         </p>
         <p>
-          {{dados.pluviometroM}} 
-        </p>
-        <p>
-          {{dados.acidezM}}
-        </p>
-        <p>
-          {{dados.tempM}}
+          {{dados}}
         </p>
       </ion-card-content>
-    </ion-card>
+  </ion-card>
+
+  <ion-card *ngFor="let dados of dadosdb"> 
+    <ion-card-content>
+      <ion-card-title>
+        Module
+      </ion-card-title>
+      <p>
+        Acidez:
+      </p>
+      <p>
+        {{dados}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card *ngFor="let dados of dadosdb1"> 
+    <ion-card-content>
+      <p>
+        Umidade:
+      </p>
+      <p>
+        {{dados}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
    <!-- <ion-item>
       <ion-input type="text" placeholder="Comando" [(ngModel)]="task"></ion-input>
     </ion-item> -->

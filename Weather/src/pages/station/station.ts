@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Http } from '@angular/http';
 
-
 /**
  * Generated class for the StationPage page.
  *
@@ -30,7 +29,8 @@ export default class StationPage {
     {nome: 'Module', umidade: '21,567', pluviometro: '544,858', acidez: '234,22', temp: '23,89'}
   ]; */
 
-  dadosdb = [{}]
+  dadosdb = [{}]     //Acidez no modulo
+  dadosdb1 = [{}]    //Umidade no módulo
 
   constructor(
     public navCtrl: NavController,
@@ -51,24 +51,51 @@ export default class StationPage {
     //this.navCtrl.setRoot(this.navCtrl.getActive().component);
   
   }
-  
+  break1 = 0;
   sendMessageModule(){
-    this.db.database.ref('/tasks').child(this.uid).push({
-      taskM: 'ligarM'
-    })
-    .then(() => {
-      this.taskM = "";
-    })
-  }
+    if(this.break1 == 0){
+      this.db.database.ref('/tasks/Module').push({
+      taskS: 'LM1'
+      })
+      .then(() => {
+        this.taskS = "";
+      })
+      this.break1 = 1
+    }
+    else{
+      this.db.database.ref('/tasks/Module').push({
+        taskS: 'LM0'
+      })
+      .then(() => {
+        this.taskS = "";
+      })
+      this.break1 = 0
+    }
+}
 
+  break = 0;
   sendMessageStation(){
-    this.db.database.ref('/tasks').child(this.uid).push({
-      taskS: 'ligarS'
-    })
-    .then(() => {
-      this.taskS = "";
-    })
-  }
+    //this.db.database.ref('/tasks').child(this.uid).push({
+      if(this.break == 0){
+            this.db.database.ref('/tasks/Station').push({
+            taskS: 'LS1'
+          })
+          .then(() => {
+            this.taskS = "";
+          })
+          this.break = 1
+      }
+      else{
+        this.db.database.ref('/tasks/Station').push({
+          taskS: 'LS0'
+        })
+        .then(() => {
+          this.taskS = "";
+        })
+        this.break = 0
+      }
+    }
+      
 
   getList(){
     let listDB = this.db.database.ref('/tasks').child(this.uid);
@@ -78,17 +105,54 @@ export default class StationPage {
     })
   }
 
+  readDataFirebase1(){
+    try{
+      this.http.get('https://chat-9910d.firebaseio.com/tasks/umidadeM.json')
+      .map(res => res.json())
+      .subscribe(data1 => {
+        this.treatsData1(data1)
+      })
+    }
+    catch(err){
+      this.readDataFirebase1()
+    }
+  }
+
+  treatsData1(dados1){
+    try{
+      this.dadosdb1 = Object.keys(dados1).map(i => dados1[i])
+      console.log(this.dadosdb1)
+      console.log('foi')
+      this.readDataFirebase()
+    }
+    catch(err){
+      this.readDataFirebase1()
+    }
+  }
+
   readDataFirebase(){
-    this.http.get('https://chat-9910d.firebaseio.com/tasks.json')
+    try{
+      this.http.get('https://chat-9910d.firebaseio.com/tasks/acidezM.json')
     .map(res => res.json())
     .subscribe(data => {
       this.treatsData(data)
     })
+    }
+    catch(err){
+      this.readDataFirebase()
+    }
+    
   }
 
   treatsData(dados){
-    this.dadosdb = Object.keys(dados).map(i => dados[i])
-    console.log(this.dadosdb)
-    console.log('foi')
+    try{
+      this.dadosdb = Object.keys(dados).map(i => dados[i])
+      console.log(this.dadosdb)
+      console.log('foi')
+      this.readDataFirebase1()
+    }
+    catch(err){
+      this.readDataFirebase()
+    }
   }
 }
