@@ -31,6 +31,9 @@ export default class StationPage {
 
   dadosdb = [{}]     //Acidez no modulo
   dadosdb1 = [{}]    //Umidade no módulo
+  dadosdb2 = [{}]     //Umidade na estação
+  dadosdb3 = [{}]     //Temperatura na estação
+  dadosdb4 = [{}]     //acidez na estação
 
   constructor(
     public navCtrl: NavController,
@@ -105,6 +108,81 @@ export default class StationPage {
     })
   }
 
+  readDataFirebase4(){
+    try{
+      this.http.get('https://chat-9910d.firebaseio.com/tasks/acidez.json')
+      .map(res => res.json())
+      .subscribe(data4 => {
+        this.treatsData4(data4)
+      })
+    }
+    catch(err){
+      this.readDataFirebase4()
+    }
+  }
+
+  treatsData4(dados4){
+    try{
+      this.dadosdb4 = Object.keys(dados4).map(i => dados4[i])
+      console.log(this.dadosdb4)
+      console.log('foi')
+      this.readDataFirebase()
+    }
+    catch(err){
+      this.readDataFirebase4()
+    }
+  }
+
+  readDataFirebase3(){
+    try{
+      this.http.get('https://chat-9910d.firebaseio.com/tasks/temp.json')
+      .map(res => res.json())
+      .subscribe(data3 => {
+        this.treatsData3(data3)
+      })
+    }
+    catch(err){
+      this.readDataFirebase3()
+    }
+  }
+
+  treatsData3(dados3){
+    try{
+      this.dadosdb3 = Object.keys(dados3).map(i => dados3[i])
+      console.log(this.dadosdb3)
+      console.log('foi')
+      this.readDataFirebase4()
+    }
+    catch(err){
+      this.readDataFirebase3()
+    }
+  }
+
+  readDataFirebase2(){
+    try{
+      this.http.get('https://chat-9910d.firebaseio.com/tasks/umidade.json')
+      .map(res => res.json())
+      .subscribe(data2 => {
+        this.treatsData2(data2)
+      })
+    }
+    catch(err){
+      this.readDataFirebase2()
+    }
+  }
+
+  treatsData2(dados2){
+    try{
+      this.dadosdb2 = Object.keys(dados2).map(i => dados2[i])
+      console.log(this.dadosdb2)
+      console.log('foi')
+      this.readDataFirebase3()
+    }
+    catch(err){
+      this.readDataFirebase2()
+    }
+  }
+
   readDataFirebase1(){
     try{
       this.http.get('https://chat-9910d.firebaseio.com/tasks/umidadeM.json')
@@ -123,7 +201,7 @@ export default class StationPage {
       this.dadosdb1 = Object.keys(dados1).map(i => dados1[i])
       console.log(this.dadosdb1)
       console.log('foi')
-      this.readDataFirebase()
+      this.readDataFirebase2()
     }
     catch(err){
       this.readDataFirebase1()
